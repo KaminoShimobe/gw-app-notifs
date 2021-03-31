@@ -1,0 +1,20 @@
+{
+  "name": "vcb",
+  "version": "1.0.0",
+  "description": "GW App",
+  "main": "index.js",
+   "engines": {
+    "node": "12.18.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preinstall": "npm config set package-lock false"
+  },
+  "author": "KaminoShimobe",
+  "license": "ISC",
+  "dependencies": {
+    "firebase-admin": "9.5.0",
+    "firebase-functions": "3.13.2",
+    "firebase-tools": "9.8.0"
+  }
+}
