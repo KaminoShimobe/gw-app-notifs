@@ -12,24 +12,22 @@ admin.initializeApp({
     })
 });
 
-// const db = admin.firestore();
 
-// exports.createNotif = functions.firestore
-//   .document('notifications/{id}/{item}')
-//   .onCreate(async (snapshot, context) => {
-//   	console.log('Notif Created', snapshot.data());
+exports.createNotif = functions.database.ref('/notifications/{id}/{item}')
+  .onCreate(async (snapshot, context) => {
+  	console.log('Notif Created', snapshot.data());
 
-//   	const userRef = admin.firestore().doc(`tokens/${item.ownerID}`);
-//   	const doc = await userRef.get();
+  	const userRef = admin.firestore().doc(`tokens/${item.ownerID}`);
+  	const doc = await userRef.get();
 
-//   	const notifToken = doc.data().token;
-//   	if(notifToken){
-//   		//send notif
-//   		sendMsg(item.username, item.summary, item.thumbnail, notifToken);
-//   	} else {
-//   		console.log("No token for this user.")
-//   	}
-//    });
+  	const notifToken = doc.data().token;
+  	if(notifToken){
+  		//send notif
+  		sendMsg(item.username, item.summary, item.thumbnail, notifToken);
+  	} else {
+  		console.log("No token for this user.")
+  	}
+   });
 
 
 
