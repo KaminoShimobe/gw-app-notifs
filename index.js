@@ -12,28 +12,28 @@ admin.initializeApp({
     })
 });
 
-const db = admin.firestore();
+// const db = admin.firestore();
 
-exports.createNotif = functions.firestore
-  .document('notifications/{id}/{item}')
-  .onCreate(async (snapshot, context) => {
-  	console.log('Notif Created', snapshot.data());
+// exports.createNotif = functions.firestore
+//   .document('notifications/{id}/{item}')
+//   .onCreate(async (snapshot, context) => {
+//   	console.log('Notif Created', snapshot.data());
 
-  	const userRef = admin.firestore().doc(`tokens/${item.ownerID}`);
-  	const doc = await userRef.get();
+//   	const userRef = admin.firestore().doc(`tokens/${item.ownerID}`);
+//   	const doc = await userRef.get();
 
-  	const notifToken = doc.data().token;
-  	if(notifToken){
-  		//send notif
-  		sendMsg(item.username, item.summary, item.thumbnail, notifToken);
-  	} else {
-  		console.log("No token for this user.")
-  	}
-   });
+//   	const notifToken = doc.data().token;
+//   	if(notifToken){
+//   		//send notif
+//   		sendMsg(item.username, item.summary, item.thumbnail, notifToken);
+//   	} else {
+//   		console.log("No token for this user.")
+//   	}
+//    });
 
 
 
-//var registrationToken = 'dPSQWSsco0PpsjAF5_phq1:APA91bHL2nhhjYnhkRtNZNNqlg3gh4VKXIRTVA2beNwzsPvCBbO1n6Z6ouhR44RhlkC-13VO4vRn2FUG374BIvUkkwgfBsnDiVz4UxVE8_wYCPRa3Csn9SMyLJ9LMH4wyS__IxzbBVkO';
+var registrationToken = 'dPSQWSsco0PpsjAF5_phq1:APA91bHL2nhhjYnhkRtNZNNqlg3gh4VKXIRTVA2beNwzsPvCBbO1n6Z6ouhR44RhlkC-13VO4vRn2FUG374BIvUkkwgfBsnDiVz4UxVE8_wYCPRa3Csn9SMyLJ9LMH4wyS__IxzbBVkO';
 
 async function sendMsg(msgTitle, msgBody, msgImg, tok){
 await admin.messaging().sendMulticast({
@@ -52,7 +52,7 @@ await admin.messaging().sendMulticast({
   });
 }
 
-//sendMsg();
+sendMsg("Abdul", "liked your post!", "https://firebasestorage.googleapis.com/v0/b/greenwoodproject.appspot.com/o/avatars%2F2021-03-05%2012%3A18%3A44.583311%2FAbdul%20Muhammad?alt=media&token=69ae469a-97aa-4b99-bb5e-66a59a722981", registrationToken);
 
 //we are sending another
 
