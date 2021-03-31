@@ -14,7 +14,7 @@ admin.initializeApp({
 
 
 exports.createNotif = functions.database.ref('/notifications/{id}/{item}')
-  .onCreate(async (snapshot, context) => {
+  .onWrite(async (snapshot, context) => {
   	console.log('Notif Created', snapshot.data());
 
   	const userRef = admin.firestore().doc(`tokens/${item.ownerID}`);
