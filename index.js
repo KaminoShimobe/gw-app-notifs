@@ -2,13 +2,13 @@ const admin = require("firebase-admin");
 const functions = require('firebase-functions');
 
 //testing
-var email = process.env.FIREBASE_CLIENT_EMAIL.replace(/\\n/g, '\n');
+
 admin.initializeApp({
   databaseURL: "https://greenwoodproject.firebaseio.com",
   credential: admin.credential.cert({
         projectId: process.env.FIREBASE_PROJECT_ID,
-        clientEmail: email,
-        privateKey: process.env.FIREBASE_PRIVATE_KEY
+        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+        privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n');
     })
 });
 
