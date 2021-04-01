@@ -13,17 +13,19 @@ admin.initializeApp({
 });
 
 
-exports.createNotif = functions.database.ref('/notifications/{id}/{item}')
-  .onWrite(async (snapshot, context) => {
+exports.createNotif = functions.database.ref('/notifications/{id}/items/{stats}')
+  .onCreate(async (snapshot, context) => {
   	console.log('Notif Created', snapshot.data());
+  
+    const userId = context.params.id;
 
-  	const userRef = admin.firestore().doc(`tokens/${item.ownerID}`);
+  	const userRef = admin.firestore().doc(`tokens/${userId}`);
   	const doc = await userRef.get();
 
   	const notifToken = doc.data().token;
   	if(notifToken){
   		//send notif
-  		sendMsg(item.username, item.summary, item.thumbnail, notifToken);
+  		sendMsg(stats.username, stats.summary, stats.thumbnail, notifToken);
   	} else {
   		console.log("No token for this user.")
   	}
@@ -50,7 +52,7 @@ await admin.messaging().sendMulticast({
   });
 }
 
-sendMsg("Abdul", "liked your post!", "https://firebasestorage.googleapis.com/v0/b/greenwoodproject.appspot.com/o/avatars%2F2021-03-05%2012%3A18%3A44.583311%2FAbdul%20Muhammad?alt=media&token=69ae469a-97aa-4b99-bb5e-66a59a722981", registrationToken);
+//sendMsg("Abdul", "liked your post!", "https://firebasestorage.googleapis.com/v0/b/greenwoodproject.appspot.com/o/avatars%2F2021-03-05%2012%3A18%3A44.583311%2FAbdul%20Muhammad?alt=media&token=69ae469a-97aa-4b99-bb5e-66a59a722981", registrationToken);
 
 //we are sending another
 
