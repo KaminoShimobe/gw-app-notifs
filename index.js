@@ -13,7 +13,8 @@ admin.initializeApp({
 });
 
 
-exports.createNotif = functions.database.ref('/notifications/{id}/items/{stats}')
+exports.createNotif = functions.firestore
+  .document('/notifications/{id}/items/{stats}')
   .onCreate(async (snapshot, context) => {
   	console.log('Notif Created', snapshot.data());
   
