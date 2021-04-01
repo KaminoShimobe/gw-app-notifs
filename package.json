@@ -4,7 +4,7 @@
   "description": "GW App",
   "main": "index.js",
    "engines": {
-    "node": "12.18.3"
+    "node": "8.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
